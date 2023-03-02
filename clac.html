@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href="calc.css">
+</head>
+<body>
+    <main id="main" >
+    <h1>QUICK TIP</h1>
+    <section>
+        <div class="bill">
+            <label for="">Bill</label>
+            <input type="number" placeholder="your bill" id="yourBill"  >
+        </div>
+        <div>
+            <div class="space">
+                
+            <label for="">Select tip</label>
+            <span id="tipPercent"></span>
+         
+            </div>
+            <input  class="range" type="range" value="0" id="inputTip">
+        </div>
+        <div class="space">
+            <span>Tip</span>
+            <span id="tipValue"></span>
+        </div>
+        <hr>
+        <div class="space total">
+            <span>Total</span>
+            <span id="totalBill"></span>
+        </div>
+    </section>
+<section>
+    <div>
+    <div class="space">
+        <label for="splitBill">Split</label>
+        <span id="splitValue"></span>
+    </div>
+    <input class="range" type="range" min="1" max="10" step="1" id="splitBill">
+    </div>
+    <div class="space">
+        <span>Bill per person</span>
+        <span id="billEach"></span>
+    </div>
+    <div class="space">
+        <span>Tip per person</span>
+        <span id="tipEach"></span>
+    </div>
+</section>
+</main>
+
+<script>
+    function calculate(){
+        let bill=Number(document.getElementById('yourBill').value);
+        let tipPercent=document.getElementById('inputTip').value;
+        let split=document.getElementById('splitBill').value;
+
+        let tipValue= Number( (bill*(tipPercent/100)).toFixed(2));
+        let tipEach=tipValue/split;
+        let billEach=(bill+tipValue)/split;
+        const total=bill+tipValue;
+
+        document.getElementById('tipPercent').innerText=`${tipPercent}% `;
+
+        document.getElementById('tipValue').innerText=`${tipValue}Rs`;
+        
+        document.getElementById('totalBill').innerText=`${total}Rs`;
+
+        if(split === '1'){
+            document.getElementById('splitValue').innerText =`${split} person`;
+        }
+        else{
+            document.getElementById('splitValue').innerText=`${split} people `;
+        }
+        document.getElementById('billEach').innerText=`${billEach}Rs`;
+
+        document.getElementById('tipEach').innerText=`${tipEach}Rs`;
+
+      
+    } 
+        let main=document.getElementById('main');
+        main.addEventListener('input',calculate)
+//for multiple values in this wrap in curly brace 
+       //console.log(bill,inputTip,split);
+   
+  
+</script>
+
+</body>
+</html>
